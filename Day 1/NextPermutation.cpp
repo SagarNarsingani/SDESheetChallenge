@@ -1,30 +1,41 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-void nextPermutation(vector<int> arr, int i, vector<vector<int>> &perm){
+void nextPermutation(vector<int> &arr){
+    int n = arr.size();
+    int i, j, k;
+    for(k=n-2; k>=0; k--){
+        if(arr[k]<arr[k+1]){
+            i=k;
+            break;
+        }
+    }
 
-    if(arr.size() == i){
-		// cout << arr << endl;
-        perm.push_back(arr);
-		return;
-	}
+    if(k<0){
+        reverse(arr.begin(), arr.end());
+        return;
+    }
 
-	// swapping current element with each one that appears after that.
-	for(int j = i; j < arr.size(); j++){
-		swap(arr[i], arr[j]);	// in the 1st iteration element will swapped by itself.
-		nextPermutation(arr, i+1, perm);
-		swap(arr[i], arr[j]);	// restoring the string as it was before -- backtracking.
-	}
+    for(k=n-1; k>=0; k--){
+        if(arr[k]>arr[i]){
+            j=k;
+            break;
+        }
+    }
+
+    swap(arr[i], arr[j]);
+
+    reverse(arr.begin()+i+1, arr.end()); 
 
     return;
 }
 
 int main(){
-    vector<int> arr = {3, 2, 1};
-    vector<vector<int>> perm = {};
-    nextPermutation(arr, 0, perm);
-    for(int i: perm[1]){
+    vector<int> arr = {1, 2, 4, 5, 3};
+    nextPermutation(arr);
+    for(int i: arr){
         cout << i << " ";
     }
     return 0;

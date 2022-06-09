@@ -3,6 +3,8 @@
 #include <unordered_set>
 using namespace std;
 
+// Time Complexity: O(N)
+// Space Complexity: O(N)
 int GetDuplicate(vector<int> arr){
     unordered_set<int> s;
     for(int i: arr){

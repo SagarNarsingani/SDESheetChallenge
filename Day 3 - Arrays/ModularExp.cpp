@@ -12,7 +12,6 @@ int ModularExp(int x, int n, int m){
     if(base==0) return 0;
 
     while(n>0){
-
         // if N is odd in X^N, we will handle X seprately and X^N-1 (N-1 will be even) saprately.
         if(n&1)
             ans = (ans*base)%m;

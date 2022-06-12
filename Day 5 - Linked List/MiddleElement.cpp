@@ -17,6 +17,8 @@ class ListNode{
         }
 };
 
+// Time Complexity: O(N)
+// Space Complexity: O(N).
 int GetMiddleElement(ListNode *head){
     // Finding total length first...
     int len=0;

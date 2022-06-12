@@ -53,5 +53,7 @@ int main(){
         cout << temp->data << " ";
         temp=temp->next;
     }
+
+    delete &head;
     return 0;
 }

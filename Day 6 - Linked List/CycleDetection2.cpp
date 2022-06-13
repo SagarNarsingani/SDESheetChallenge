@@ -42,7 +42,10 @@ int DetectCycle(ListNode *head){
         slow = slow->next;
         if(fast==slow) {
             int i=0;
-            // L1 = C - L2. 
+            // L1 = C - L2.
+            // C -- Length of Cycle.
+            // L1 -- Distance of Start Node to Starting Node of Cycle.
+            // L2 -- Distance between Starting point of cycle to Collision node of Fast and Slow. 
             while(head!=slow){
                 slow = slow->next;
                 head = head->next;

@@ -84,17 +84,23 @@ ListNode *Reverse(ListNode *head){
     return prev;
 }
 
+// Time Complexity: O(N).
+// Space Complexity: O(1).
 bool isPalindrome(ListNode *head){
+    // When the list is empty or only have one element.
     if(head==NULL or head->next==NULL) return true;
 
+    // Finding Middle Element.
     ListNode *fast=head, *slow=head;
     while(fast->next and fast->next->next){
         fast = fast->next->next;
         slow = slow->next;
     }
 
+    // Linked List after Middle Element will be reversed.
     slow->next = Reverse(slow->next);
 
+    // Basic Pointer method to check if list was palindrome or not.
     ListNode *p1=head, *p2=slow->next;
     while(p2){
         if(p1->data != p2->data){
@@ -103,6 +109,7 @@ bool isPalindrome(ListNode *head){
         p2=p2->next;
         p1=p1->next;
     }
+    
     return true;
 }
 int main(){

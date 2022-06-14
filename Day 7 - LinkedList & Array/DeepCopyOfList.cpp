@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <unordered_set>
 using namespace std;
 
 // Class for Linked List
@@ -55,6 +54,11 @@ ListNode *addRandoms(ListNode *head, vector<int>randoms){
     return head;
 }
 
+// In another approach we can use hash table to store address of corresponding deep copy of each node with itself.
+// It will cost O(N) time and O(N) space. 
+
+// Time Complexity: O(N).
+// Space Complexity: O(1).
 ListNode *CreateDeepCopy(ListNode *head){
     if(head==NULL) return head;
     if(head->next==NULL){

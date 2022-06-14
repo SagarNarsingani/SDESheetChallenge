@@ -51,25 +51,20 @@ ListNode *CreateBottomList(vector<int> arr){
 
 // Function to merge two child lists in one in sorted manner.
 ListNode *Merge(ListNode *head1, ListNode *head2){
-    ListNode *temp = new ListNode(-1);
-    ListNode *res = temp;
+    ListNode *res = NULL;
 
-    while(head1 and head2){
-        if(head1->data < head2->data){
-            temp->child = head1;
-            head1 = head1->child;
-            temp = temp->child;
-        } else {
-            temp->child = head2;
-            head2 = head2->child;
-            temp = temp->child;
-        }
+    if(head1==NULL) return head2;
+    if(head2==NULL) return head1;
+    
+    if(head1->data <= head2->data){
+        res = head1;
+        res->child = Merge(head1->child, head2);
+    } else {
+        res = head2;
+        res->child = Merge(head1, head2->child);
     }
 
-    if(head1) temp->child = head1;
-    if(head2) temp->child = head2;
-
-    return res->child;
+    return res;
 }
 
 
@@ -89,6 +84,22 @@ ListNode *Flatten(ListNode *head){
     //     curr = curr->child;
     // }
     // cout << endl;
+
+    return head;
+}
+
+ListNode *mergesort(ListNode *head){
+    ListNode *tmp1 = head;
+    while(tmp1){
+        ListNode *tmp2 = tmp1;
+        while(tmp2->child){
+            tmp2 = tmp2->child;
+        }
+        tmp2->child = tmp1->next;
+        tmp1 = tmp1->next;
+    }
+
+    
 
     return head;
 }
@@ -125,7 +136,7 @@ int main(){
     // }
 
     // Printing Flat List.
-    curr = Flatten(head);
+    curr = mergesort(head);
     while(curr){
         cout << curr->data << " ";
         curr = curr->child;

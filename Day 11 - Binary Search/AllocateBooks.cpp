@@ -29,11 +29,11 @@ long long GetMinimalAllocation(int n, int m, vector<int> books){
     if(n>m) return -1;
 
     // defining the range for binary search.
-    // best case: all books have same number of pages and number of student are equal to number of books.
+    // best case: number of student are equal to number of books.
     // worst case: number of student is 1.
     long long s=0, e=0;
     for(int book: books){
-        s = min(s, (long long)book);
+        s = max(s, (long long)book);
         e = e + book;         
     }
 

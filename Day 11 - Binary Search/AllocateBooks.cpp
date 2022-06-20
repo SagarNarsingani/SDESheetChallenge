@@ -29,7 +29,7 @@ long long GetMinimalAllocation(int n, int m, vector<int> books){
     if(n>m) return -1;
 
     // defining the range for binary search.
-    // best case: all books have same number of pages and number of student, n.
+    // best case: all books have same number of pages and number of student are equal to number of books.
     // worst case: number of student is 1.
     long long s=0, e=0;
     for(int book: books){
@@ -37,7 +37,7 @@ long long GetMinimalAllocation(int n, int m, vector<int> books){
         e = e + book;         
     }
 
-    // Binary Search through the solution space.
+    // Binary Search through the solution space(best to worst case).
     long long res = INT_MAX;
     while(s<=e){
         long long mid = (e+s)>>1;

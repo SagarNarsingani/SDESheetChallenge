@@ -49,7 +49,7 @@ vector<int> GetKSumComb(vector<int> a, vector<int> b, int k){
             visited.insert({i-1, j});
         }
 
-        // storing pair (i-1, j) in heap and set.
+        // storing pair (i, j-1) in heap and set.
         if(visited.find({i, j-1})==visited.end()){
             maxHeap.push({a[i]+b[j-1], {i, j-1}});
             visited.insert({i, j-1});

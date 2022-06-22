@@ -20,7 +20,7 @@ struct compare{
 };
 
 
-// Time Complexity: O(N) + O(XLogK) + O(K)
+// Time Complexity: O(N) + O(XLogK) + O(KLogK)
 // Space Complexity: O(X) + O(K).
 // X is total number of unique elements.
 vector<int> GetKMostFreqElements(vector<int> arr, int k){

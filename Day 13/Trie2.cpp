@@ -12,8 +12,8 @@ class Node{
 
         Node(char d){
             data = d;
-            cnt = 0;
-            occ=1;
+            cnt = 0;    // it will be increased if string is ending at this node.
+            occ=1;      // shows the occurence of this node.
         }
 
         ~Node(){
@@ -34,17 +34,20 @@ class Trie{
             Node *tmp = root;
             while(tmp->next.find(word[i])!=tmp->next.end()){
                 tmp = tmp->next[word[i]];
+                // increasing occurence of nodes that are already present.
                 tmp->occ++;
                 i++;
                 if(i==n) break;
             }
 
+            // inserting remaining letters.
             for(int j=i; j<n; j++){
                 Node *temp = new Node(word[j]);
                 tmp->next[word[j]] = temp;
                 tmp = temp;
             }
 
+            // increasing cnt attribute of last node.
             tmp->cnt++;
 
             return;
@@ -54,10 +57,12 @@ class Trie{
             int n = word.length();
             int i=0;
             Node *tmp = root;
+            // we go till given word is there in trie.
             while(tmp->next.find(word[i])!=tmp->next.end()){
                 tmp = tmp->next[word[i]];
                 cout << tmp->data << " ";
                 i++;
+                // will return cnt, which shows how many strings ended on this node.
                 if(i==n) return tmp->cnt;
             }
 
@@ -67,24 +72,24 @@ class Trie{
         int countWordsStartingWith(string word){
             int n = word.length();
             int i=0;
-            int cnt=0;
             Node *tmp = root;
+            // reaching till the end of given word in the trie.
             while(tmp->next.find(word[i])!=tmp->next.end()){
                 tmp = tmp->next[word[i]];
                 i++;
+                // if reached will return number of times last letter was occurred.
                 if(i==n){
                     return tmp->occ;
                 }
             }
-
-
-            return cnt;
+            return 0;
         }
 
         void erase(string word){
             int n = word.length();
             int i=0;
             Node *tmp = root;
+            // reducing occurence of each letter of given word.
             while(tmp->next.find(word[i])!=tmp->next.end()){
                 tmp = tmp->next[word[i]];
                 tmp->occ--;
@@ -95,7 +100,7 @@ class Trie{
                 }
             }
 
-
+            // making memory free.
             i=0;
             tmp = root;
             while(tmp->next.find(word[i])!=tmp->next.end()){

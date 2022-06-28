@@ -50,6 +50,7 @@ class LRUCache{
 
 };
 
+// Space Complexity: O(N).
 class LFUCache{
     public:
         // map to track each node's address (based on key). 
@@ -67,6 +68,7 @@ class LFUCache{
             freq=0; // least frequency
         }
 
+        // O(1) time.
         int get(int key){
             if(hash.find(key)!=hash.end()){
                 int currFreq = hash[key]->freq;
@@ -90,6 +92,7 @@ class LFUCache{
             return -1;
         }
 
+        // O(1) time.
         void put(int key, int val){
             // if node already exists.
             if(hash.find(key)!=hash.end()){

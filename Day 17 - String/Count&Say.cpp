@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-// Time Complexity: O(N).
+// Time Complexity: O(N^2).
 // Space Complexity: O(1).
 string CountNSay(int n){
     string s = "1"; // 1st sequence.

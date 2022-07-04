@@ -35,6 +35,7 @@ class Tree{
             return root;
         }
 
+        // Pre Order Traversal : Root - Left - Right.
         void PreOrderTraversal(TreeNode* root){
             if(root==NULL){
                 return;
@@ -47,6 +48,7 @@ class Tree{
             return;
         }
 
+        // Post Order Traversal : Left - Right - Root.
         void PostOrderTraversal(TreeNode *root){
             if(root==NULL){
                 return;
@@ -59,6 +61,7 @@ class Tree{
             return;
         }
 
+        // In Order Traversal : Left - Root - Right.
         void InOrderTraversal(TreeNode *root){
             if(root==NULL){
                 return;

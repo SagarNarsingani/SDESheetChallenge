@@ -43,6 +43,9 @@ TreeNode* BuildTree(TreeNode* root, vector<int> nodes, int &i, int n){
 // Time Complexity: O(N).
 // Space Complexity: O(N).
 vector<int> GetBottomView(TreeNode* root){
+    if(root==NULL)
+        return {};
+
     // will store each line no. and corresponding last element of it.
     map<int, int> m;    // map will store results in ordered manner.
     queue<pair<TreeNode*, int>> q;

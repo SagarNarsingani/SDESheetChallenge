@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -19,6 +20,17 @@ class TreeNode{
                 delete right;
         }
 };
+
+void InOrder(TreeNode *root){
+    if(root==NULL)
+        return;
+    
+    InOrder(root->left);
+    cout << root->data << " ";
+    InOrder(root->right);
+
+    return;
+}
 
 TreeNode *BuildTree(TreeNode *root, vector<int> nodes, int &i, int n){
     if(i>=n || nodes[i]==-1){

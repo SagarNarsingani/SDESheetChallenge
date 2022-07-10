@@ -5,11 +5,12 @@ using namespace std;
 class TreeNode{
     public:
         int data;
-        TreeNode *left, *right;
+        TreeNode *left, *right, *next;
+        // next is for problem NodesAtSameLevel.
 
         TreeNode(int d){
             data = d;
-            right = left = NULL;
+            right = left = next = NULL;
         }
 
         ~TreeNode(){

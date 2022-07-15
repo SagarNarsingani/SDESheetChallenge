@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <stack>
 #include <set>
 using namespace std;
 
@@ -47,6 +48,43 @@ vector<int> TopologicalSort(vector<vector<int>> &edges, int v, int e){
         }
 
         ans.push_back(f);
+    }
+
+    return ans;
+}
+
+vector<bool> visited;
+
+void dfs(int node, vector<set<int>> &adj, stack<int> &topo){
+    // push all nodes that are dependent on current one into the stack first, using recurssion.
+    for(int i: adj[node]){
+        if(!visited[i]){
+            visited[i] = true;
+            dfs(i, adj, topo);
+        }
+    }
+    // then push current node.
+    topo.push(node);
+    return;
+}
+
+// dfs method to get topological order.
+// same time + space complexities as bfs approach.
+vector<int> TopologicalSortDFS(vector<vector<int>> &edges, int v, int e){
+    vector<set<int>> adj = getAdjList(v, edges);
+    stack<int> topo;
+    visited.assign(v, false);
+    for(int i=0; i<v; i++){
+        if(!visited[i]){
+            visited[i] = true;
+            dfs(i, adj, topo);
+        }
+    }
+
+    vector<int> ans;
+    while(!topo.empty()){
+        ans.push_back(topo.top());
+        topo.pop();
     }
 
     return ans;

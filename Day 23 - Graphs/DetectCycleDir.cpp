@@ -17,6 +17,46 @@ vector<set<int>> getAdjList(int v, vector<vector<int>> &edges){
     return adj;
 }
 
+// Kahn's Algorithm: To get Topological Order of Nodes.
+// It is only possible in Directed Acyclic Graph.
+// hence if we can't traverse all the nodes, it means the graph is cyclic.
+// It has same Time and Space Complexity.
+bool TopologicalSort(vector<vector<int>> &edges, int v){
+    vector<set<int>> adj = getAdjList(v, edges);
+
+    // count indegree
+    vector<int> in(v+1, 0);
+    for(auto i: adj){
+        for(int j: i){
+            in[j]++;
+        }
+    }
+
+    queue<int> q;
+    for(int i=1; i<=v; i++){
+        if(in[i]==0){
+            q.push(i);
+        }
+    }
+
+    int cnt = 0;
+    while(!q.empty()){
+        int f = q.front();
+        q.pop();
+
+        for(int i: adj[f]){
+            in[i]--;
+            if(in[i]==0){
+                q.push(i);
+            }
+        }
+
+        cnt++;
+    }
+
+    return !(cnt==v);
+}
+
 // DFS method to find the cycle.
 bool detectCycDfs(int node, vector<set<int>> &adj){
     // adding node in dfs path.
@@ -62,6 +102,6 @@ int main(){
         {1, 2}
     };
 
-    cout << isThereCycle(edges, 2);
+    cout << TopologicalSort(edges, 2);
     return 0;
 }

@@ -26,6 +26,7 @@ class Graph{
 
         // Time Complexity: O((V + E) * LogV) -- Log V is used by set internally to keep nodes sorted.
         // Space Complexity: O(V).
+        // This will enter in infinite loop when we have negative edges, in undirected graph.
         vector<int> Dijikstra(int src){
             vector<int> dist(V, INT_MAX);
             

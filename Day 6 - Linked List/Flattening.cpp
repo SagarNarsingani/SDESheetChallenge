@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <queue>
 using namespace std;
 
 // Class for Linked List
@@ -18,6 +19,13 @@ class ListNode{
             while(next){
                 delete next;
             }
+        }
+};
+
+class Comparator{
+    public:
+        bool operator()(const ListNode* child, const ListNode* parent){
+            return child->data > parent->data;
         }
 };
 
@@ -104,6 +112,59 @@ ListNode *mergesort(ListNode *head){
     return head;
 }
 
+ListNode *flatten(ListNode *head){
+    priority_queue<ListNode*, vector<ListNode*>, Comparator> pq;
+
+    while(head){
+        pq.push(head);
+        head = head->next;
+    }
+
+    ListNode *t = pq.top();
+    ListNode *root = new ListNode(t->data);
+    pq.pop();
+
+    if(t->child)
+        pq.push(t->child);
+    
+    ListNode *tmp = root;
+    while(!pq.empty()){
+        t = pq.top();
+        tmp->child = new ListNode(t->data);
+        pq.pop();
+        if(t->child)
+            pq.push(t->child);
+        tmp = tmp->child;
+    }
+
+    return root;
+}
+
+ListNode *flattenHelp(ListNode *a, ListNode *b){
+    if(a==NULL) return b;
+    if(b==NULL) return a;
+
+    ListNode *res;
+    if(a->data < b->data){
+        res = a;
+        res->child = flattenHelp(a->child, b);
+    } else {
+        res = b;
+        res->child = flattenHelp(a, b->child);
+    }
+
+    res->next = NULL;
+
+    return res;
+}
+
+ListNode *flattenLL(ListNode *head){
+    if(head==NULL || head->next==NULL)
+        return head;
+    
+    return flattenHelp(head, flattenLL(head));
+}
+
 int main(){
     // Creating List.
     ListNode *head = CreateList({3, 5, 22, 26, 39});
@@ -136,11 +197,10 @@ int main(){
     // }
 
     // Printing Flat List.
-    curr = mergesort(head);
+    curr = flatten(head);
     while(curr){
         cout << curr->data << " ";
         curr = curr->child;
     }
-
     return 0;
 }
